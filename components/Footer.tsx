@@ -11,7 +11,7 @@ export default function Footer() {
             className="flex items-center mb-4 sm:mb-0"
           >
             <span className="self-center text-xl font-semibold text-white whitespace-nowrap">
-              Movies<span className="pl-1 text-2xl text-red-500">+</span>
+              Movies<span className="pl-1 text-2xl text-red-600">+</span>
             </span>
           </a>
           <ul className="flex flex-wrap items-center mb-6 sm:mb-0">
