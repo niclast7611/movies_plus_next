@@ -1,15 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
+import MainLayout from "./MainLayout";
 
 export default function Home() {
   return (
-    <>
-     <h1 className='text-blue-500'>Hello World</h1>
-    
-    </>
-  )
+    <div className="">
+      <NavBar />
+      {/* for now its here to style but need a separate page for later */}
+      <MainLayout />
+      <Footer />
+    </div>
+  );
 }
