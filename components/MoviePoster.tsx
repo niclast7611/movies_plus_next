@@ -1,14 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import { AiFillStar, AiFillClockCircle } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import { Results } from "../interfaces/Results";
 
-export default function MoviePoster({ movieValue }) {
+const MoviePoster: React.FC<Results> = ({ movieValue }) => {
   return (
     <div className="relative transition duration-500 transform hover:scale-105 w-[225px] hover:cursor-pointer">
       <div className="z-0">
         <Image
           src={`https://image.tmdb.org/t/p/original${movieValue?.poster_path}`}
-          height={225}
+          height={25}
           width={225}
           alt="movie"
         />
@@ -30,4 +31,6 @@ export default function MoviePoster({ movieValue }) {
       </div>
     </div>
   );
-}
+};
+
+export default MoviePoster;
