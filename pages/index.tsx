@@ -8,7 +8,7 @@ export default function Home() {
       <NavBar />
       {/* for now its here to style but need a separate page for later */}
       <MainLayout />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

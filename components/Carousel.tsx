@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import MoviePoster from "./MoviePoster";
 import { QueryInfo } from "../interfaces/QueryInfo";
 import { Results } from "../interfaces/Results";
-
+import { RxDividerVertical } from "react-icons/rx";
 type Props = {
   queryInfo: QueryInfo;
   carouselTitle: string;
@@ -17,7 +17,8 @@ const Carousel: React.FC<Props> = ({ queryInfo, carouselTitle }) => {
 
   return (
     <div className="">
-      <div className="pl-4 ml-4 text-2xl text-white border-l-[3px] border-l-red-600 font-bold uppercase">
+      <div className="py-3 pl-4 ml-4 text-2xl font-bold text-white uppercase">
+        <span className="border-l-[3px] border-l-red-600 pr-3"></span>
         {carouselTitle}
       </div>
       <Swiper slidesPerView={6} navigation modules={[Navigation]}>
