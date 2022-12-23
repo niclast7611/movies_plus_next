@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import MoviePoster from "./MoviePoster";
+import MoviePoster from "../MoviePoster";
 
 export default function Carousel() {
   return (
