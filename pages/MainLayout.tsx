@@ -14,7 +14,7 @@ export default function MainLayout() {
   const popular = useGetPopularMoviesQuery(api_token);
   const topRated = useGetTopRatedMoviesQuery(api_token);
   const upcoming = useGetUpcomingMoviesQuery(api_token);
-
+  console.log("nowPlaying", nowPlaying);
   return (
     <div className=" bg-neutral-900">
       <Carousel queryInfo={nowPlaying} carouselTitle={"Now Playing"} />

@@ -7,11 +7,12 @@ const MoviePoster: React.FC<Results> = ({ movieValue }) => {
   return (
     <div className="relative transition duration-500 transform hover:scale-105 w-[225px] hover:cursor-pointer">
       <div className="z-0">
-        <Image
+        {/* Got a weird warning about width and height using Image tag. For now substituting it with <img> */}
+        <img
           src={`https://image.tmdb.org/t/p/original${movieValue?.poster_path}`}
-          height={25}
-          width={225}
           alt="movie"
+          width="225"
+          height="auto"
         />
       </div>
       <div className="absolute bottom-0 z-10 bg-black/[.65] h-1/3 w-[225px] flex flex-col items-start justify-evenly pl-2">
