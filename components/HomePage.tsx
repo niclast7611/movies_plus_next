@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Carousel from "../components/Carousel";
+import React from "react";
+import Carousel from "./Carousel";
 
 import {
   useGetNowPlayingMoviesQuery,
@@ -14,7 +14,7 @@ export default function MainLayout() {
   const popular = useGetPopularMoviesQuery(api_token);
   const topRated = useGetTopRatedMoviesQuery(api_token);
   const upcoming = useGetUpcomingMoviesQuery(api_token);
-  console.log("nowPlaying", nowPlaying);
+
   return (
     <div className=" bg-neutral-900">
       <Carousel queryInfo={nowPlaying} carouselTitle={"Now Playing"} />
