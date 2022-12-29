@@ -1,26 +1,33 @@
 import React, { use, useEffect, useState } from "react";
-import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
-import IconButton from "@mui/material/IconButton";
+import { AiFillStar } from "react-icons/ai";
+import { BsHeartFill, BsHeart } from "react-icons/bs";
 import Rating from "@mui/material/Rating";
 import { formatter } from "../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavMovie, removeFavMovie } from "../redux/features/FavoritesSlice";
-import { Checkbox } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+
 function MoviePage({ movieInfo }) {
   const releaseYear = movieInfo.release_date.slice(0, 4);
 
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
-  const listOfFavoriteMovies = useSelector((state) => state.favMovies);
-  console.log("listOfFavoriteMovies", listOfFavoriteMovies);
+  const listOfFavoriteMovies = useSelector(
+    (state) => state.favMovies.favoriteMovies
+  );
 
-  console.log();
-  // useEffect(() => {
-  //   listOfFavoriteMovies.map((movie) => {
-  //     movie.id === movieInfo.id ? setChecked(true) : setChecked(false);
-  //   });
-  // }, [listOfFavoriteMovies]);
+  useEffect(() => {
+    listOfFavoriteMovies
+      ? listOfFavoriteMovies.map((movie) => {
+          movie.id === movieInfo.id ? setChecked(true) : null;
+        })
+      : null;
+  }, [listOfFavoriteMovies]);
 
+  const handleUnAddFavMovie = () => {
+    setChecked(false);
+    dispatch(removeFavMovie(movieInfo.id));
+  };
   return (
     <div className="flex flex-row justify-around py-10 text-white bg-neutral-900">
       <div>
@@ -87,20 +94,19 @@ function MoviePage({ movieInfo }) {
             {formatter.format(movieInfo.budget)}
           </span>
         </div>
-        {/* <button type="button" onClick={() => dispatch(addFavMovie(movieInfo))}>
-          Click Me
-        </button> */}
         <div>
-          {listOfFavoriteMovies.checked ? (
-            <AiFillHeart
-              style={{ color: "red", fontSize: "40", cursor: "pointer" }}
-              onClick={() => dispatch(removeFavMovie(movieInfo.id))}
+          {checked ? (
+            <BsHeartFill
+              style={{ color: "red", fontSize: "30", cursor: "pointer" }}
+              onClick={() => handleUnAddFavMovie()}
             />
           ) : (
-            <AiOutlineHeart
-              style={{ color: "red", fontSize: "40", cursor: "pointer" }}
-              onClick={() => dispatch(addFavMovie(movieInfo))}
-            />
+            <Tooltip title="Add Movie to Favorites">
+              <BsHeart
+                style={{ color: "red", fontSize: "30", cursor: "pointer" }}
+                onClick={() => dispatch(addFavMovie(movieInfo))}
+              />
+            </Tooltip>
           )}
         </div>
       </div>
