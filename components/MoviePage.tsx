@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
 import Rating from "@mui/material/Rating";
@@ -7,12 +7,73 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavMovie, removeFavMovie } from "../redux/features/FavoritesSlice";
 import Tooltip from "@mui/material/Tooltip";
 
-function MoviePage({ movieInfo }) {
-  const releaseYear = movieInfo.release_date.slice(0, 4);
+type Props = {
+  movieInfo: MovieInfoData;
+};
+
+export interface MovieInfoData {
+  adult?: boolean;
+  backdrop_path?: string;
+  belongs_to_collection?: BelongsToCollectionData;
+  budget?: number;
+  genres?: Genres[];
+  homepage?: string;
+  id?: number;
+  imdb_id?: string;
+  original_language?: string;
+  original_title?: string;
+  overview?: string;
+  popularity?: number;
+  poster_path?: string;
+  production_companies?: ProductCompanyData[];
+  production_countries?: ProductionCountriesData[];
+  release_date?: string;
+  revenue?: number;
+  runtime?: number;
+  spoken_languages?: SpokenLanguagesData[];
+  status?: string;
+  tagline?: string;
+  title?: string;
+  video?: boolean;
+  vote_average?: number;
+  vote_count?: number;
+}
+
+interface BelongsToCollectionData {
+  id: number;
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
+}
+
+interface Genres {
+  id: number;
+  name: string;
+}
+
+interface ProductCompanyData {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+interface ProductionCountriesData {
+  iso_3166_1: string;
+  name: string;
+}
+
+interface SpokenLanguagesData {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+const MoviePage: FC<React.PropsWithChildren<Props>> = ({ movieInfo }) => {
+  const releaseYear = movieInfo?.release_date?.slice(0, 4);
 
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
-  const listOfFavoriteMovies = useSelector(
+  const listOfFavoriteMovies: MovieInfoData[] = useSelector(
     (state) => state.favMovies.favoriteMovies
   );
 
@@ -52,7 +113,7 @@ function MoviePage({ movieInfo }) {
           <div className="flex flex-row">
             <Rating
               name="read-only"
-              value={Math.round(movieInfo.vote_average)}
+              value={Math.round(movieInfo.vote_average ?? 0)}
               readOnly
               max={10}
               size="large"
@@ -64,14 +125,14 @@ function MoviePage({ movieInfo }) {
               }
             />
             <div className="pl-2 text-xl leading-2">
-              {Math.round(movieInfo.vote_average)}
+              {Math.round(movieInfo.vote_average ?? 0)}
             </div>
           </div>
         </div>
         <div>
           <span className="font-bold uppercase ">The Genres</span>
           <div className="pt-2 space-x-5 text-sm text-red-600 uppercase">
-            {movieInfo.genres.map((genre) => (
+            {movieInfo?.genres?.map((genre) => (
               <span key={genre.id}>{genre.name}</span>
             ))}
           </div>
@@ -91,7 +152,7 @@ function MoviePage({ movieInfo }) {
         <div className="flex flex-col">
           <div className="pb-2 font-bold uppercase">budget</div>
           <span className="text-neutral-400">
-            {formatter.format(movieInfo.budget)}
+            {formatter.format(movieInfo.budget ?? 0)}
           </span>
         </div>
         <div>
@@ -112,6 +173,6 @@ function MoviePage({ movieInfo }) {
       </div>
     </div>
   );
-}
+};
 
 export default MoviePage;
